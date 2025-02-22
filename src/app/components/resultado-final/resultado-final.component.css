@@ -1,0 +1,17 @@
+.bg-success {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+  }
+  
+  .bg-danger {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+  }
+  
+  .list-group-item:disabled {
+    opacity: 1 !important;
+  }
+  
+  .list-group-item {
+    transition: all 0.3s ease;
+  }

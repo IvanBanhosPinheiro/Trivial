@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand" [routerLink]="['home']">
+          <img src="img/tibial1.png" alt="Logo" height="40">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- About en el centro -->
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="navbar-brand" [routerLink]="['avout']">
+                <img src="{{about}}" alt="About" height="40"
+                (mouseenter)="about='img/avoutInv.png'" 
+                (mouseleave)="about='img/avout.png'">
+              </a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <!-- Login -->
+            <li class="nav-item" *ngIf="!isLoggedIn">
+              <a class="navbar-brand" [routerLink]="['login']" [state]="{ login: true }">
+                <img src="{{acceder}}" alt="Logo" height="40"
+                (mouseenter)="acceder='img/aksederInv.png'" 
+                (mouseleave)="acceder='img/akseder.png'">
+              </a>
+            </li>
+            <!-- Registrarse -->
+            <li class="nav-item" *ngIf="!isLoggedIn">
+              <a class="navbar-brand" [routerLink]="['register']" [state]="{ login: false }">
+                <img src="{{registrarse}}" alt="Logo" height="40"
+                (mouseenter)="registrarse='img/rejistrarseInv.png'" 
+                (mouseleave)="registrarse='img/rejistrarse.png'">
+              </a>
+            </li>
+
+            <!-- Ir a la partida -->
+            <li class="nav-item" *ngIf="isLoggedIn">
+              <a class="navbar-brand" >
+                <img src="{{partida}}" alt="Logo" height="40" [routerLink]="['pregunta']"
+                (mouseenter)="partida='img/partydaInv.png'" 
+                (mouseleave)="partida='img/partyda.png'">
+              </a> 
+            </li>
+              
+              <!-- Cerrar sesion -->
+              <li class="nav-item" *ngIf="isLoggedIn">
+                <a class="navbar-brand" >
+                  <img src="{{exit}}" alt="Logo" height="40" (click)="logout()"
+                  (mouseenter)="exit='img/exytInv.png'" 
+                  (mouseleave)="exit='img/exyt.png'">
+                </a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>

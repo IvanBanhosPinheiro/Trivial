@@ -1,0 +1,77 @@
+<div class="container d-flex flex-column align-items-center pt-3">
+  <!-- Pantalla inicial -->
+  <div *ngIf="!iniciar" class="text-center">
+    <div class="mb-4">
+      <img src="img/tibial1.png" alt="Logo" class="img-fluid" style="max-width: 800px;">
+    </div>
+    
+    <!-- Indicador de carga -->
+    <div *ngIf="!datosListos" class="mb-3">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-2">Cargando datos del juego...</p>
+      <p class="text-muted small">Preguntas cargadas: {{preguntasCargadas}}/{{arrayCategoria.length * 20}}</p>
+    </div>
+
+    <!-- Botón de inicio -->
+    <img [src]="datosListos ? imagen : 'img/comensarInv.png'"
+    [ngClass]="{'opacity-50': !datosListos, 'cursor-pointer': datosListos}"
+    (click)="datosListos && empezarPartida()"
+    alt="Iniciar Partida"
+    class="img-fluid"
+    style="max-width: 200px;"
+    (mouseenter)="imagen='img/comensarInv.png'"
+    (mouseleave)="imagen='img/comensar.png'">
+  </div>
+
+    <!-- Pantalla de juego -->
+    <div *ngIf="iniciar && datosListos" class="w-100">
+      <div class="row">
+  
+        <!-- Imagen y Pregunta -->
+        <div class="col-12 text-center mb-4">
+          <img [src]="'img/'+arrayCategoria[contadorCategoria].nombre+'.png'" alt="Imagen pregunta" class="img-fluid rounded shadow-lg mb-4" style="max-height: 300px;">
+          
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">{{arrayPreguntasPorCategoria[contadorCategoria][contadorPregunta].pregunta}}</h3>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Respuestas -->
+        <div class="col-12">
+          <div class="list-group text-center">
+            <button *ngFor="let respuesta of arrayPreguntasPorCategoria[contadorCategoria][contadorPregunta].respuestas; let i = index"
+                    class="list-group-item list-group-item-action mb-2 p-3"
+                    [ngClass]="{
+                      'bg-success text-white': respuestaSeleccionada && respuesta.correcta,
+                      'bg-danger text-white': respuestaSeleccionada && !respuesta.correcta && respuestaIndice === i
+                    }"
+                    [disabled]="respuestaSeleccionada || !puedeResponder"
+                    (click)="verificarRespuesta(i)">
+              {{respuesta.respuesta}}
+            </button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <!-- Indicadores de respuesta -->
+    <div class="row mt-4">
+      <div class="col-12 text-center">
+        <img *ngIf="bien" src="img/vien.png" alt="Correcto" class="img-fluid mx-2" style="max-height: 100px;">
+        <img *ngIf="mal" src="img/Mal.png" alt="Incorrecto" class="img-fluid mx-2" style="max-height: 100px;">
+        <img *ngIf="siguiente" 
+            src="img/flecha.png" 
+            alt="Siguiente" 
+            class="img-fluid mx-2" 
+            style="max-height: 100px; cursor: pointer;"
+            (click)="siguientePregunta()"
+            (mouseenter)="imagenSiguiente='img/flechaInv.png'"
+            (mouseleave)="imagenSiguiente='img/flecha.png'">
+      </div>
+    </div>
+
+</div>

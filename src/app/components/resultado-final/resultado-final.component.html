@@ -1,0 +1,41 @@
+<div class="container text-center mt-4">
+    <!-- Encabezado -->
+    <h1 class="mb-4">¡Juego Terminado!</h1>
+    
+    <!-- Información del jugador -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title">{{usuario.nombre}}</h2>
+        <p class="card-text fs-4">Puntuación final: {{puntuacion}}</p>
+      </div>
+    </div>
+  
+    <!-- Mensaje según puntuación -->
+    <div class="alert" [ngClass]="{
+      'alert-success': puntuacion >= 80,
+      'alert-info': puntuacion >= 60 && puntuacion < 80,
+      'alert-warning': puntuacion >= 40 && puntuacion < 60,
+      'alert-danger': puntuacion < 40
+    }">
+      {{mensaje}}
+    </div>
+  
+    <!-- Botones de acción reemplazados por imágenes -->
+    <div class="d-flex justify-content-center gap-4 mt-4">
+        <img [src]="imagenJugar" 
+             alt="Jugar de nuevo" 
+             class="img-fluid" 
+             style="max-width: 400px; cursor: pointer;"
+             (click)="volverAJugar()"
+             (mouseenter)="imagenJugar='img/volverJugarInv.png'"
+             (mouseleave)="imagenJugar='img/volverJugar.png'">
+  
+        <img [src]="imagenInicio" 
+             alt="Volver al inicio" 
+             class="img-fluid" 
+             style="max-width: 400px; cursor: pointer;"
+             (click)="irAlInicio()"
+             (mouseenter)="imagenInicio='img/volverInicioInv.png'"
+             (mouseleave)="imagenInicio='img/volverInicio.png'">
+      </div>
+  </div>

@@ -1,0 +1,27 @@
+<main class="form-signin d-flex align-items-center justify-content-center vh-100">
+  <form class="text-center">
+    <img class="mb-4" src="img/icon.png" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">{{titulo}}</h1>
+
+    <div class="form-floating" [ngClass]="{'d-none': login}">
+      <input type="text" class="form-control" id="floatingName" placeholder="Nombre" #nombre>
+      <label for="floatingName">Nombre</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" #email>
+      <label for="floatingInput">Email</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" #password>
+      <label for="floatingPassword">Contraseña</label>
+    </div>
+
+    <div class="checkbox mb-3">
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="button" 
+            (click)="login ? onLogin(email.value, password.value) : onRegister(nombre.value, email.value, password.value)">
+      {{login ? 'Entrar' : 'Registrarse'}}
+    </button>
+  </form>
+</main>
