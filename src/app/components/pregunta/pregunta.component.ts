@@ -25,6 +25,7 @@ export class PreguntaComponent implements OnInit , OnDestroy{
   usuario: any = {};//{id: 6, nombre: 'usuario 2', email: 'usuario2@test.com'}
 
   arrayCategoria: any[] = [];
+  arrayCategorias2: any[] = [];
   /*[
   {id: 1, nombre: 'Historia', descripcion: 'Preguntas relacionadas....'}
   {id: 2, nombre: 'Ciencia', descripcion: 'Preguntas sobre  ...'}
@@ -98,23 +99,25 @@ export class PreguntaComponent implements OnInit , OnDestroy{
   private cargarCategoriasYPreguntas(): void {
     this.trivialService.getCategorias().subscribe({
       next: (response) => {
-        this.arrayCategoria = response;
+        this.arrayCategorias2 = response;
         //console.log('Categorías cargadas:', this.arrayCategoria);
         
         // Contador para saber cuándo terminan todas las cargas
-        const totalCategorias = this.arrayCategoria.length;
+        const totalCategorias = this.arrayCategorias2.length;
         this.preguntasCargadas = 0;
 
         // Cargar preguntas para cada categoría
-        this.arrayCategoria.forEach((categoria) => {
+        this.arrayCategorias2.forEach((categoria) => {
           this.trivialService.getPreguntas(categoria.id, "5").subscribe({
             next: (preguntasResponse) => {
+              this.arrayCategoria.push(preguntasResponse.categoria)
               this.arrayPreguntasPorCategoria.push(preguntasResponse.preguntas);
               this.preguntasCargadas++;
               
-              //console.log(`Preguntas cargadas para ${categoria.nombre}:`, 
-                         //preguntasResponse.preguntas);
-
+              // console.log(`Preguntas cargadas para ${categoria.nombre}:`, 
+              //            preguntasResponse.preguntas);
+              console.log(this.arrayPreguntasPorCategoria);
+              
               if (this.preguntasCargadas === totalCategorias) {
                 //console.log('Todas las preguntas cargadas');
                 this.datosListos = true;
