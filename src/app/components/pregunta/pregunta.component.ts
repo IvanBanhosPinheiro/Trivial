@@ -236,8 +236,7 @@ export class PreguntaComponent implements OnInit , OnDestroy{
   nuevaPartida() {
     this.trivialService.iniciarPartida(this.partida).subscribe({
       next: (response) => {
-        this.partida.id = response.id; // Store the returned ID
-        //console.log('Partida iniciada:', response);
+        this.partida.id = response.id; 
       },
       error: (error) => console.error('Error al iniciar partida:', error)
     });
